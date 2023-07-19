@@ -52,17 +52,17 @@ public class RedisResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public boolean isCaseSensitive(int column) throws SQLException {
-        throw new SQLFeatureNotSupportedException();
+        return true;
     }
 
     @Override
     public boolean isSearchable(int column) throws SQLException {
-        throw new SQLFeatureNotSupportedException();
+        return false;
     }
 
     @Override
     public boolean isCurrency(int column) throws SQLException {
-        throw new SQLFeatureNotSupportedException();
+        return false;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class RedisResultSetMetaData implements ResultSetMetaData {
 
     @Override
     public boolean isSigned(int column) throws SQLException {
-        throw new SQLFeatureNotSupportedException();
+        return false;
     }
 
     @Override
     public int getColumnDisplaySize(int column) throws SQLException {
-        throw new SQLFeatureNotSupportedException();
+        return 11;
     }
 
     @Override

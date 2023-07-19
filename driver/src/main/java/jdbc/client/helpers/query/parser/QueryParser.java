@@ -32,17 +32,36 @@ public class QueryParser {
     private static final Map<String, ClusterKeyword> CLUSTER_KEYWORDS =
             Arrays.stream(ClusterKeyword.values()).collect(Collectors.toMap(Enum::name, v -> v));
 
-    private static final Set<Command> BLOCKING_COMMANDS = Set.of(
-            Command.BLMOVE, Command.BLMPOP, Command.BLPOP, Command.BRPOP,
-            Command.BRPOPLPUSH, Command.BZMPOP, Command.BZPOPMAX, Command.BZPOPMIN
-    );
+    private static final Set<Command> BLOCKING_COMMANDS = new HashSet<>();
+    private static final Set<Command> COMMANDS_WITH_KEYWORDS = new HashSet<>();
 
-    private static final Set<Command> COMMANDS_WITH_KEYWORDS = Set.of(
-            Command.ACL, Command.CLIENT, Command.CLUSTER, Command.COMMAND,
-            Command.CONFIG, Command.FUNCTION, Command.MEMORY, Command.MODULE,
-            Command.OBJECT, Command.PUBSUB, Command.SCRIPT, Command.SLOWLOG,
-            Command.XGROUP, Command.XINFO
-    );
+    
+    static {
+		BLOCKING_COMMANDS.add(Command.BLMOVE); 
+		BLOCKING_COMMANDS.add(Command.BLMPOP); 
+		BLOCKING_COMMANDS.add(Command.BLPOP); 
+		BLOCKING_COMMANDS.add(Command.BRPOP);
+		BLOCKING_COMMANDS.add(Command.BRPOPLPUSH); 
+		BLOCKING_COMMANDS.add(Command.BZMPOP); 
+		BLOCKING_COMMANDS.add(Command.BZPOPMAX); 
+		BLOCKING_COMMANDS.add(Command.BZPOPMIN);
+		
+		COMMANDS_WITH_KEYWORDS.add(Command.ACL); 
+		COMMANDS_WITH_KEYWORDS.add(Command.CLIENT); 
+		COMMANDS_WITH_KEYWORDS.add(Command.CLUSTER); 
+		COMMANDS_WITH_KEYWORDS.add(Command.COMMAND); 
+		COMMANDS_WITH_KEYWORDS.add(Command.CONFIG); 
+		COMMANDS_WITH_KEYWORDS.add(Command.FUNCTION); 
+		COMMANDS_WITH_KEYWORDS.add(Command.MEMORY); 
+		COMMANDS_WITH_KEYWORDS.add(Command.MODULE); 
+		COMMANDS_WITH_KEYWORDS.add(Command.OBJECT); 
+		COMMANDS_WITH_KEYWORDS.add(Command.PUBSUB); 
+		COMMANDS_WITH_KEYWORDS.add(Command.SCRIPT); 
+		COMMANDS_WITH_KEYWORDS.add(Command.SLOWLOG); 
+		COMMANDS_WITH_KEYWORDS.add(Command.XGROUP); 
+		COMMANDS_WITH_KEYWORDS.add(Command.XINFO);
+    }
+
 
     private static @Nullable Command getCommand(@NotNull String command) {
         return COMMANDS.get(getName(command));
